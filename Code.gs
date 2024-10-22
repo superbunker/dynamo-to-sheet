@@ -1,5 +1,5 @@
 // Constants
-var DYNAMODB_REGION = 'us-east-1'; // e.g., 'us-east-1'
+var DYNAMODB_REGION = 'YourRegion'; // e.g., 'us-east-1'
 var DYNAMODB_TABLE_NAME = 'YourTableName'; // Your DynamoDB table name
 
 // Helper function to extract value from DynamoDB attribute
