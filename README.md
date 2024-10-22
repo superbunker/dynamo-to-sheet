@@ -1,19 +1,17 @@
 # dynamo-to-sheet
 
-This Google Apps Script allows you to synchronize data from an Amazon DynamoDB table to a Google Sheet. The script performs a full scan of your DynamoDB table and either creates a new sheet with all the data or appends new records to an existing sheet.
+This Google Apps Script synchronizes data from an Amazon DynamoDB table to a Google Sheet. The script performs a full scan of your DynamoDB table and either creates a new sheet with all the data or appends new records to an existing sheet.
 
 ## Features
 
 - Automatically creates headers based on DynamoDB attributes
-- Handles all DynamoDB data types (String, Number, Boolean, NULL, List, Map, String Set, Number Set)
-- Supports incremental updates to existing sheets
 - Uses AWS Signature Version 4 for authentication
 - Maintains data type integrity during transfer
 
 ## Prerequisites
 
 1. An AWS account with access to DynamoDB
-2. AWS credentials (Access Key ID and Secret Access Key) with appropriate permissions
+2. AWS credentials (Access Key ID and Secret Access Key) with appropriate read permissions
 3. A Google Sheet where you want to store the data
 4. Google Apps Script editor access
 
@@ -23,7 +21,7 @@ This Google Apps Script allows you to synchronize data from an Amazon DynamoDB t
 2. Go to Extensions > Apps Script
 3. Delete any code in the script editor
 4. Copy and paste the entire script into the editor
-5. Save the project (File > Save)
+5. Save the project
 
 ## Configuration
 
@@ -37,7 +35,7 @@ This Google Apps Script allows you to synchronize data from an Amazon DynamoDB t
 2. Update the constants at the top of the script:
    ```javascript
    var DYNAMODB_REGION = 'us-east-1';  // Change to your AWS region
-   var DYNAMODB_TABLE_NAME = 'User';    // Change to your table name
+   var DYNAMODB_TABLE_NAME = 'YourTableName';    // Change to your table name
    ```
 
 ## Usage
@@ -74,7 +72,6 @@ To set up automatic synchronization:
 
 - Store AWS credentials securely in Script Properties, never in the code
 - Use AWS IAM roles with minimal required permissions
-- Consider implementing additional error handling for production use
 - Be mindful of DynamoDB read capacity units when setting sync frequency
 
 ## Troubleshooting
@@ -92,15 +89,6 @@ If you encounter errors:
 - The script performs a full table scan, which may not be optimal for very large tables
 - Currently assumes 'id' as the primary key for detecting duplicates
 - Maximum execution time is 6 minutes (Google Apps Script limitation)
-- Data type conversion may not handle all edge cases
-
-## Contributing
-
-Feel free to modify the script to suit your needs. Consider adding:
-- Custom primary key configuration
-- Selective column synchronization
-- Error logging to a separate sheet
-- Custom data type handling
 
 ## License
 
